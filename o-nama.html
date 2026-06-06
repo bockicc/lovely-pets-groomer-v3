@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="O salonu Lovely Pets – naša priča, tim i sertifikati. Profesionalna nega kućnih ljubimaca u Kruševcu od 2019. godine." />
+  <title>O nama | Lovely Pets – Salon za ljubimce Kruševac</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23b8895a%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238c6338%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2232%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2236%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%3E%F0%9F%90%BE%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml" />
+  <style>
+    /* ── About stranica lokalni stilovi ── */
+    .about-intro { padding: 7rem 0; background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-image-col { position: relative; }
+    .about-img-main {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 480px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-img-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-img-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .about-img-badge .num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--gold-dark);
+      line-height: 1;
+      display: block;
+    }
+    .about-img-badge span {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    .about-text-col .section-sub { max-width: 100%; }
+    .about-text-col p { margin-bottom: 1.2rem; }
+    .about-values {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .about-value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--cream);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--gold);
+    }
+    .about-value-item .vi-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .about-value-item .vi-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .about-value-item .vi-text span {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Sertifikati */
+    .certs-section { padding: 6rem 0; background: var(--cream); }
+    .certs-section .section-header { text-align: center; margin-bottom: 3rem; }
+    .certs-section .section-header .divider { margin: 1rem auto 2rem; }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .cert-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .cert-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .cert-card h3 {
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+    .cert-card p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+    .cert-badge {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.25rem 0.8rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border-radius: 20px;
+    }
+
+    /* Tim */
+    .team-section { padding: 6rem 0; background: var(--white); }
+    .team-section .section-header { text-align: center; margin-bottom: 3rem; }
+    .team-section .section-header .divider { margin: 1rem auto 2rem; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .team-card {
+      background: var(--cream);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      height: 200px;
+      background: linear-gradient(135deg, var(--cream-dark), var(--border));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+    .team-info { padding: 1.5rem; }
+    .team-info h3 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 0.2rem; }
+    .team-info .role {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+    .team-info p { font-size: 0.88rem; color: var(--text-light); }
+
+    /* Priča vremenski tok */
+    .story-section { padding: 6rem 0; background: var(--cream); }
+    .story-section .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .story-section .section-header .divider { margin: 1rem auto 2rem; }
+    .timeline {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light));
+    }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    .tl-dot {
+      width: 58px;
+      height: 58px;
+      background: var(--white);
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-sm);
+    }
+    .tl-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.3rem 1.5rem;
+      flex: 1;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .tl-year {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .tl-content h4 { font-size: 1rem; color: var(--text-dark); margin-bottom: 0.4rem; }
+    .tl-content p  { font-size: 0.85rem; color: var(--text-light); }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <header class="navbar" role="banner">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Lovely Pets – početna">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-text">
+          <span class="logo-name">Lovely Pets</span>
+          <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="o-nama.html" class="active">O nama</a>
+        <a href="usluge.html">Usluge</a>
+        <a href="galerija.html">Galerija</a>
+        <a href="kontakt.html" class="nav-cta">Zakaži termin</a>
+      </nav>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="nav-mobile" aria-label="Mobilna navigacija">
+    <button class="close-btn" aria-label="Zatvori meni">&times;</button>
+    <a href="index.html">Početna</a>
+    <a href="o-nama.html" class="active">O nama</a>
+    <a href="usluge.html">Usluge i cenovnik</a>
+    <a href="galerija.html">Galerija</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-tag">Naša priča</span>
+        <h1 class="section-title">O salonu Lovely Pets</h1>
+        <div class="divider"></div>
+        <p class="section-sub">Upoznajte tim koji stoji iza najlepših transformacija u Kruševcu.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ O SALONU – UVOD ════════════ -->
+    <section class="about-intro">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-col reveal">
+            <div class="about-img-main">
+              <img src="assets/img/pas-o-nama.jpg" alt="Nega pasa u salonu Lovely Pets Kruševac" />
+            </div>
+            <div class="about-img-badge">
+              <span class="num">5+</span>
+              <span>godina iskustva</span>
+            </div>
+          </div>
+          <div class="about-text-col reveal reveal-delay-2">
+            <span class="section-tag">Ko smo mi</span>
+            <h2 class="section-title">Ljubav prema životinjama je naš pokretač</h2>
+            <div class="divider"></div>
+            <p>
+              Salon <strong>Lovely Pets</strong> otvoren je 2019. godine sa jednom misijom – 
+              pružiti svakom ljubimcu tretman dostojan profesionalnog salona, a svakom vlasniku 
+              mir uma da je njihov četvoronožni prijatelj u najboljim rukama.
+            </p>
+            <p>
+              Smestili smo se u Kruševcu, u ulici Pećka 76, gde nas svakodnevno posjećuju 
+              psi i mačke svih rasa i veličina. Naš salon je osmišljen tako da bude mirno, 
+              prijatno i sigurno okruženje – bez stresa za ljubimce, bez brige za vlasnike.
+            </p>
+            <p>
+              Koristimo isključivo profesionalnu kozmetiku sertifikovanu za upotrebu na životinjama – 
+              šampone, balzame i sprejeve koji neguju dlaku, kožu i čula vašeg ljubimca, 
+              a ne narušavaju njihov prirodni zaštitni sloj.
+            </p>
+            <div class="about-values">
+              <div class="about-value-item">
+                <span class="vi-icon">🧡</span>
+                <div class="vi-text">
+                  <strong>Individualni pristup</strong>
+                  <span>Svaki ljubimac ima svoje navike i temperament. Prilagođavamo se svakom.</span>
+                </div>
+              </div>
+              <div class="about-value-item">
+                <span class="vi-icon">🔬</span>
+                <div class="vi-text">
+                  <strong>Bezbedni preparati</strong>
+                  <span>Bez parabena, sulfata i veštačkih mirisa. Deklarisani i testirani proizvodi.</span>
+                </div>
+              </div>
+              <div class="about-value-item">
+                <span class="vi-icon">⏱️</span>
+                <div class="vi-text">
+                  <strong>Poštovanje termina</strong>
+                  <span>Vaše vreme je dragoceno. Termini se uvek poštuju i ne čeka se dugo.</span>
+                </div>
+              </div>
+            </div>
+            <a href="kontakt.html" class="btn btn-primary">Zakaži termin danas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ SERTIFIKATI ════════════ -->
+    <section class="certs-section" aria-labelledby="certs-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Stručnost i edukacija</span>
+          <h2 class="section-title" id="certs-heading">Naši sertifikati i obuke</h2>
+          <div class="divider"></div>
+          <p class="section-sub" style="margin:0 auto; max-width:540px;">
+            Kontinuirano se usavršavamo jer naši ljubimci to zaslužuju.
+          </p>
+        </div>
+        <div class="certs-grid">
+          <div class="cert-card reveal reveal-delay-1">
+            <span class="cert-icon">🏅</span>
+            <h3>Sertifikat grumera</h3>
+            <p>Osnovna i napredna obuka za negu i šišanje pasa i mačaka svih rasa</p>
+            <span class="cert-badge">2019</span>
+          </div>
+          <div class="cert-card reveal reveal-delay-2">
+            <span class="cert-icon">🐾</span>
+            <h3>Nega posebnih rasa</h3>
+            <p>Specijalistički kurs za negu španijela, pudlica, maltezera i nordijskih rasa</p>
+            <span class="cert-badge">2021</span>
+          </div>
+          <div class="cert-card reveal reveal-delay-3">
+            <span class="cert-icon">🧪</span>
+            <h3>Kozmetika za životinje</h3>
+            <p>Stručna obuka o sastavu, primeni i bezbednosti preparata za negu kućnih ljubimaca</span>
+            <span class="cert-badge">2022</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ TIM ════════════ -->
+    <section class="team-section" aria-labelledby="team-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Naš tim</span>
+          <h2 class="section-title" id="team-heading">Upoznajte nas</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal reveal-delay-1">
+            <div class="team-avatar">👩</div>
+            <div class="team-info">
+              <h3>Jelena Petrović</h3>
+              <p class="role">Vlasnik · Glavni grumer</p>
+              <p>Sa više od 5 godina iskustva u nezi pasa i mačaka, Jelena vodi salon sa strašću i posvećenošću. Specijalista za šišanje pudlica i španijela.</p>
+            </div>
+          </div>
+          <div class="team-card reveal reveal-delay-2">
+            <div class="team-avatar">👩‍🦱</div>
+            <div class="team-info">
+              <h3>Milica Đorđević</h3>
+              <p class="role">Grumer · Specijalista za mačke</p>
+              <p>Milica je naš ekspert za rad sa mačkama. Sa neizmjernom nežnošću i strpljenjem, svaka mačka osjeća se sigurno u njenim rukama.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ NAŠA PRIČA – TIMELINE ════════════ -->
+    <section class="story-section" aria-labelledby="story-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Naša priča</span>
+          <h2 class="section-title" id="story-heading">Kako smo rasli</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="tl-dot">🌱</div>
+            <div class="tl-content">
+              <p class="tl-year">2019. godina</p>
+              <h4>Osnivanje salona</h4>
+              <p>Lovely Pets otvara vrata u Kruševcu sa jednom stolom, velikom ljubavlju i ambicijom da postane omiljeni salon u gradu.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal reveal-delay-1">
+            <div class="tl-dot">📈</div>
+            <div class="tl-content">
+              <p class="tl-year">2020. godina</p>
+              <h4>Prva 100 zadovoljnih klijenata</h4>
+              <p>Zahvaljujući preporukama i posvećenom radu, dostigli smo prvu veliku prekretnicu.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal reveal-delay-2">
+            <div class="tl-dot">🎓</div>
+            <div class="tl-content">
+              <p class="tl-year">2021. godina</p>
+              <h4>Proširenje tima i usluga</h4>
+              <p>Pridružuje se Milica, specijalista za mačke. Uvode se furminiranje i spa tretmani.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal reveal-delay-3">
+            <div class="tl-dot">⭐</div>
+            <div class="tl-content">
+              <p class="tl-year">2024. godina</p>
+              <h4>500+ zadovoljnih klijenata</h4>
+              <p>Danas smo ponos Kruševca – sa stalnom bazom klijenata i odličnim recenzijama koji govore više od bilo kog opisa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem;">
+            <div class="logo-icon">🐾</div>
+            <div class="logo-text">
+              <span class="logo-name">Lovely Pets</span>
+              <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+            </div>
+          </div>
+          <p>Profesionalni salon za negu kućnih ljubimaca u srcu Kruševca. Jer vaš ljubimac zaslužuje samo najbolje.</p>
+          <a
+            href="https://www.instagram.com/lovely_pets_groomer?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ig-link"
+            aria-label="Pratite nas na Instagramu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4>Prečice</h4>
+          <ul>
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="o-nama.html" class="active">O salonu</a></li>
+            <li><a href="usluge.html">Usluge i cenovnik</a></li>
+            <li><a href="galerija.html">Galerija</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Pećka 76, Kruševac</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <a href="tel:0642641469" style="color:rgba(255,255,255,0.65);">064 2641469</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">🕐</span>
+            <span>Pon–Pet: 09:00–18:00<br>Sub: 09:00–15:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Lovely Pets. Sva prava zadržana.</span>
+        <span>Napravili sa ❤️ za ljubimce u Kruševcu</span>
+          </div>
+        </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

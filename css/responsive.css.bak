@@ -1,0 +1,290 @@
+/* ============================================
+    LOVELY PETS – responsive.css
+    Svi media queries za mobilne i tablete
+    ============================================ */
+
+/* ── TABLET (max 1024px) ── */
+@media (max-width: 1024px) {
+
+  :root { --nav-h: 70px; }
+
+  /* Navbar */
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.82rem; }
+
+  /* Hero */
+  .hero { grid-template-columns: 1fr 1fr; }
+  .hero-left { padding: 5rem 2.5rem 5rem 5%; }
+  .hero-stats { gap: 1.8rem; }
+
+  /* Why grid */
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Services */
+  .services-grid { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+
+  /* BA */
+  .ba-grid { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-brand { grid-column: 1 / -1; }
+
+  /* O nama */
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-image-col { max-width: 560px; margin: 0 auto; }
+
+  /* Galerija */
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Kontakt */
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ========================================
+   MOBILE HERO STYLES FOR HOME PAGE
+   ======================================== */
+
+/* MOBILE HERO STYLES FOR HOME PAGE */
+@media (max-width: 768px) {
+
+  :root { --nav-h: 70px; }
+
+  body.home .hero {
+    display: block;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Slika kao pozadina - hero-right apsolutno unutar hero sekcije */
+  body.home .hero-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+  }
+
+/* Bez overlay - koristite filter na slici */
+  body.home .hero-right::before {
+    display: none;
+  }
+
+body.home .hero-image-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+   body.home .hero-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: brightness(0.7) contrast(1.15) !important;
+    transform: translateY(35px) !important;
+  }
+
+  body.home .hero-image-overlay {
+    display: none;
+  }
+
+  body.home .hero-left {
+    position: relative;
+    z-index: 2;
+    padding: calc(var(--nav-h) + 2rem) 5% 3rem;
+    background: transparent;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    transform: translateY(-25px) !important;
+  }
+
+  body.home .hero-left::after {
+    display: none;
+  }
+
+  body.home .hero-left h1,
+  body.home .hero-left .hero-desc,
+body.home .hero-left .hero-eyebrow span,
+   body.home .hero-left .hero-eyebrow {
+     color: var(--white) !important;
+     text-shadow: 0 2px 10px rgba(43, 33, 24, 0.9), 0 1px 3px rgba(43, 33, 24, 0.95) !important;
+     text-align: center !important;
+   }
+
+  body.home .hero-left .hero-eyebrow {
+    display: block !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+  }
+
+   body.home .hero-left .hero-stat strong,
+  body.home .hero-left .hero-stat span {
+    color: var(--white) !important;
+    text-shadow: 0 2px 6px rgba(43, 33, 24, 0.9) !important;
+  }
+
+  body.home .hero-left h1 em {
+    color: var(--gold) !important;
+    text-shadow: 0 2px 10px rgba(43, 33, 24, 0.9), 0 1px 3px rgba(43, 33, 24, 0.95) !important;
+  }
+
+  body.home .hero-stats {
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  body.home .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  body.home .hero-actions .btn {
+    width: 100%;
+    max-width: 290px;
+    justify-content: center;
+  }
+
+  body.home .hero-actions .btn-outline {
+    background: transparent !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+  }
+
+  body.home .hero-actions .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+  }
+}
+
+/* ── GENERAL MOBILE (max 768px) ── */
+@media (max-width: 768px) {
+
+  /* Navbar - sakrij desktop linkove, prikaži hamburger */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  /* Why grid */
+  .why-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* Services */
+  .services-preview-header { flex-direction: column; align-items: flex-start; }
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* BA */
+  .ba-grid { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+  /* Page header */
+  .page-header { padding-top: calc(var(--nav-h) + 3rem); padding-bottom: 3rem; }
+
+  /* O nama */
+  .about-grid { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid  { grid-template-columns: 1fr; }
+
+  /* Usluge */
+  .services-detail-grid { grid-template-columns: 1fr; }
+  .price-table { font-size: 0.85rem; }
+  .price-table th, .price-table td { padding: 0.75rem 0.8rem; }
+
+  /* Galerija */
+  .filter-bar { gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+
+  /* Kontakt */
+  .contact-grid { grid-template-columns: 1fr; }
+  .hours-table th,
+  .hours-table td { padding: 0.6rem 0.8rem; font-size: 0.85rem; }
+  .map-placeholder { height: 260px; }
+}
+
+/* ── SMALL MOBILE (max 480px) ── */
+@media (max-width: 480px) {
+
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.6rem; }
+
+  .gallery-grid { grid-template-columns: 1fr; }
+  .certs-grid   { grid-template-columns: 1fr; }
+
+  .ba-img { height: 160px; font-size: 3rem; }
+
+  .service-card-thumb { height: 160px; font-size: 3.5rem; }
+
+  .btn { padding: 0.75rem 1.5rem; }
+
+  footer { padding: 3rem 0 0; }
+}
+
+/* ── NAVBAR STYLES (MOBILE ONLY) ── */
+@media (max-width: 768px) {
+
+  /* Početna stranica - na mobilnoj uvek tamna pozadina koja se stapaje sa hero slikom */
+  body.home .navbar {
+    background: #2b2b2b;
+    border-bottom: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Sakrij navbar pozadinu kad je meni otvoren - ostaje tamna */
+  body.menu-open .navbar {
+    background: #2b2b2b !important;
+    border-bottom: none !important;
+  }
+
+  /* Na home stranici i posle skrola ostaje ista tamna pozadina */
+  body.home .navbar.scrolled {
+    background: #2b2b2b;
+    backdrop-filter: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+  }
+
+  /* Svetli elementi na home stranici (uvek, jer je navbar uvek tamniji) */
+  body.home .nav-logo .logo-name,
+  body.home .nav-logo .logo-sub {
+    color: var(--white) !important;
+  }
+
+  body.home .nav-logo .logo-icon {
+    background: var(--white) !important;
+  }
+
+  body.home .hamburger span {
+    background: var(--white) !important;
+  }
+
+  /* Tamni hamburger kad je meni otvoren */
+  body.home .hamburger.active span {
+    background: var(--brown) !important;
+  }
+
+  /* Unutrašnje stranice - fiksni navbar uvijek */
+  body:not(.home) .navbar {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  body:not(.home) .nav-logo .logo-name,
+  body:not(.home) .nav-logo .logo-sub {
+    color: var(--brown);
+  }
+
+  body:not(.home) .hamburger span {
+    background: var(--brown);
+  }
+}

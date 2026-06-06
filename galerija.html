@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Galerija salona Lovely Pets Kruševac – fotografije pre i posle, psi, mačke. Pogledajte transformacije naših ljubimaca." />
+  <title>Galerija | Lovely Pets – Salon za ljubimce Kruševac</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23b8895a%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238c6338%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2232%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2236%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%3E%F0%9F%90%BE%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* ── Galerija lokalni stilovi ── */
+
+    /* Filter bar */
+    .gallery-controls {
+      padding: 3rem 0 2rem;
+      background: var(--white);
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-right: 0.5rem;
+    }
+    .filter-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+      background: var(--white);
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .filter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-dark);
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-color: transparent;
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(184,137,90,0.35);
+    }
+    .gallery-count {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* Gallery grid */
+    .gallery-section { padding: 3.5rem 0 6rem; background: var(--white); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      background: var(--cream-dark);
+    }
+    .gallery-item:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: var(--shadow-md);
+    }
+    .gallery-thumb {
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-thumb-emoji {
+      font-size: 5rem;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-item:hover .gallery-thumb-emoji {
+      transform: scale(1.15);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .img-doberman {
+      object-position: 50% 15% !important;
+    }
+    /* Različite pozadine po kategoriji */
+    .gallery-item[data-category="psi"] .gallery-thumb {
+      background: linear-gradient(135deg, #ede0cf, #d4bfa0);
+    }
+    .gallery-item[data-category="macke"] .gallery-thumb {
+      background: linear-gradient(135deg, #e8e0d8, #cfc4b5);
+    }
+    .gallery-item[data-category="pre-posle"] .gallery-thumb {
+      background: linear-gradient(135deg, #e8d8c0, #c8a878);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(92,61,30,0.75));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay-text {
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .gallery-overlay-text span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-top: 0.2rem;
+    }
+    .gallery-cat-badge {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: rgba(255,255,255,0.9);
+      color: var(--gold-dark);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .gallery-caption {
+      padding: 0.9rem 1rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .gallery-caption strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      color: var(--text-dark);
+    }
+    .gallery-caption span {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* Pre-Posle poseban stil (dupla kartica) */
+    .gallery-item.ba-item .gallery-thumb {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 240px;
+    }
+    .gallery-item.ba-item .ba-half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      position: relative;
+    }
+    .gallery-item.ba-item .ba-half.before-h {
+      background: linear-gradient(135deg, #d4c0a8, #b8a088);
+    }
+    .gallery-item.ba-item .ba-half.after-h {
+      background: linear-gradient(135deg, #c8b090, #a88860);
+    }
+    .gallery-item.ba-item .ba-mini-label {
+      position: absolute;
+      top: 0.4rem; left: 0.4rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+    .ba-half.before-h .ba-mini-label { background: rgba(0,0,0,0.4); color: #fff; }
+    .ba-half.after-h  .ba-mini-label { background: var(--gold); color: #fff; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-content {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+    }
+    .lightbox-emoji {
+      font-size: 8rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .lightbox-caption-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+    .lightbox-close:hover { background: var(--gold); color: var(--white); }
+    .lightbox-hint {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .gallery-controls { position: static; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+      .gallery-thumb { height: 180px; }
+      .gallery-item.ba-item .gallery-thumb { height: 180px; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <header class="navbar" role="banner">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Lovely Pets – početna">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-text">
+          <span class="logo-name">Lovely Pets</span>
+          <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="o-nama.html">O nama</a>
+        <a href="usluge.html">Usluge</a>
+        <a href="galerija.html" class="active">Galerija</a>
+        <a href="kontakt.html" class="nav-cta">Zakaži termin</a>
+      </nav>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="nav-mobile" aria-label="Mobilna navigacija">
+    <button class="close-btn" aria-label="Zatvori meni">&times;</button>
+    <a href="index.html">Početna</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="usluge.html">Usluge i cenovnik</a>
+    <a href="galerija.html" class="active">Galerija</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-tag">Naši radovi</span>
+        <h1 class="section-title">Galerija transformacija</h1>
+        <div class="divider"></div>
+        <p class="section-sub">Svaki ljubimac je priča za sebe. Pogledajte neverovatne transformacije naših klijenata.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ FILTER BAR ════════════ -->
+    <div class="gallery-controls" role="navigation" aria-label="Filter galerije">
+      <div class="container">
+        <div class="filter-bar">
+          <span class="filter-label">Prikaži:</span>
+          <button class="filter-btn active" data-filter="sve" aria-pressed="true">Sve</button>
+          <button class="filter-btn" data-filter="psi" aria-pressed="false">🐕 Psi</button>
+          <button class="filter-btn" data-filter="macke" aria-pressed="false">🐈 Mačke</button>
+          <button class="filter-btn" data-filter="pre-posle" aria-pressed="false">✨ Pre i posle</button>
+          <span class="gallery-count" aria-live="polite">8 fotografija</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ GALLERY GRID ════════════ -->
+    <section class="gallery-section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <h2 id="gallery-heading" class="sr-only">Galerija fotografija</h2>
+        <div class="gallery-grid" role="list">
+
+          <!-- 1. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Doberman – Kan">
+            <div class="gallery-thumb">
+              <img class="gallery-img img-doberman" src="assets/img/doberman.png" alt="Doberman – Kan u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Doberman – Kan
+                  <span>Tretman protiv linjanja i nega kože</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Doberman – Kan</strong>
+              <span>Tretman protiv linjanja i nega kože</span>
+            </div>
+          </div>
+
+          <!-- 2. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Zlatni Retriver – Reks">
+            <div class="gallery-thumb">
+              <img src="assets/img/zlatni-retriver.jpg" alt="Zlatni Retriver – Reks u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Zlatni Retriver – Reks
+                  <span>Deshedding tretman i izbacivanje poddlake</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Zlatni Retriver – Reks</strong>
+              <span>Deshedding tretman i izbacivanje poddlake</span>
+            </div>
+          </div>
+
+          <!-- 3. Mačke -->
+          <div class="gallery-item" data-category="macke" role="listitem" tabindex="0" aria-label="Persijska mačka – Mila">
+            <div class="gallery-thumb">
+              <img src="assets/img/bela-persijska-macka.jpg" alt="Persijska mačka – Mila u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Persijska mačka – Mila
+                  <span>Kupanje, feniranje i raščetkavanje</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Mačka</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Persijska mačka – Mila</strong>
+              <span>Kupanje, feniranje i raščetkavanje</span>
+            </div>
+          </div>
+
+          <!-- 4. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Pudlica – Max">
+            <div class="gallery-thumb">
+              <img src="assets/img/pudlica.jpg" alt="Pudlica – Max u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Pudlica – Max
+                  <span>Kompletan tretman i stilizovanje frizure</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Pudlica – Max</strong>
+              <span>Kompletan tretman i stilizovanje frizure</span>
+            </div>
+          </div>
+
+          <!-- 5. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Maltezer – Srećko">
+            <div class="gallery-thumb">
+              <img src="assets/img/maltezer.jpg" alt="Maltezer – Srećko u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Maltezer – Srećko
+                  <span>Higijenski tretman i finiširanje</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Maltezer – Srećko</strong>
+              <span>Higijenski tretman i finiširanje</span>
+            </div>
+          </div>
+
+          <!-- 6. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Mešanac – Čarli">
+            <div class="gallery-thumb">
+              <img src="assets/img/mesanac.jpg" alt="Mešanac – Čarli u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Mešanac – Čarli
+                  <span>Šišanje i nega za mešance</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Mešanac – Čarli</strong>
+              <span>Šišanje i nega za mešance</span>
+            </div>
+          </div>
+
+          <!-- 7. Psi -->
+          <div class="gallery-item" data-category="psi" role="listitem" tabindex="0" aria-label="Pomeranac – Aki">
+            <div class="gallery-thumb">
+              <img src="assets/img/pas-o-nama.jpg" alt="Pomeranac – Aki u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Pomeranac – Aki
+                  <span>Šišanje po standardu rase (Boo cut)</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Pas</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Pomeranac – Aki</strong>
+              <span>Šišanje po standardu rase (Boo cut)</span>
+            </div>
+          </div>
+
+          <!-- 8. Mačke -->
+          <div class="gallery-item" data-category="macke" role="listitem" tabindex="0" aria-label="Dugodlaka mačka – Keti">
+            <div class="gallery-thumb">
+              <img src="assets/img/macka-u-rozem.jpg" alt="Dugodlaka mačka – Keti u salonu Lovely Pets" />
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">
+                  Dugodlaka mačka – Keti
+                  <span>Tretman protiv ćebanja dlake</span>
+                </div>
+              </div>
+              <span class="gallery-cat-badge">Mačka</span>
+            </div>
+            <div class="gallery-caption">
+              <strong>Dugodlaka mačka – Keti</strong>
+              <span>Tretman protiv ćebanja dlake</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Uvećana slika">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Zatvori">✕</button>
+      <div id="lightbox-img" class="lightbox-emoji">🐾</div>
+      <p id="lightbox-caption" class="lightbox-caption-text"></p>
+    </div>
+    <p class="lightbox-hint">Pritisnite Escape ili kliknite van slike za zatvaranje</p>
+  </div>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem;">
+            <div class="logo-icon">🐾</div>
+            <div class="logo-text">
+              <span class="logo-name">Lovely Pets</span>
+              <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+            </div>
+          </div>
+          <p>Profesionalni salon za negu kućnih ljubimaca u srcu Kruševca. Jer vaš ljubimac zaslužuje samo najbolje.</p>
+          <a
+            href="https://www.instagram.com/lovely_pets_groomer?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ig-link"
+            aria-label="Pratite nas na Instagramu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4>Prečice</h4>
+          <ul>
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="o-nama.html">O salonu</a></li>
+            <li><a href="usluge.html">Usluge i cenovnik</a></li>
+            <li><a href="galerija.html" class="active">Galerija</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Pećka 76, Kruševac</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <a href="tel:0642641469" style="color:rgba(255,255,255,0.65);">064 2641469</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">🕐</span>
+            <span>Pon–Pet: 09:00–18:00<br>Sub: 09:00–15:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Lovely Pets. Sva prava zadržana.</span>
+        <span>Napravili sa ❤️ za ljubimce u Kruševcu</span>
+          </div>
+        </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>

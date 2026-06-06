@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kontakt salon Lovely Pets Kruševac – Pećka 76, tel. 064 2641469. Radno vreme, mapa i zakazivanje termina." />
+  <title>Kontakt i zakazivanje | Lovely Pets – Kruševac</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23b8895a%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238c6338%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2232%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2236%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%3E%F0%9F%90%BE%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* ── Kontakt lokalni stilovi ── */
+    .contact-section { padding: 6rem 0 5rem; background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Info kolona */
+    .contact-info-col { display: flex; flex-direction: column; gap: 2rem; }
+
+    .info-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .info-card:hover { box-shadow: var(--shadow-sm); }
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .info-card-header .ic-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .info-card-header h3 {
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    /* Radno vreme tabela */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table th {
+      text-align: left;
+      padding: 0.6rem 0;
+      font-weight: 600;
+      color: var(--text-dark);
+      width: 55%;
+    }
+    .hours-table td {
+      padding: 0.6rem 0;
+      color: var(--text-mid);
+      text-align: right;
+    }
+    .hours-table .closed { color: #c0392b; font-weight: 500; }
+    .hours-table .today-row th,
+    .hours-table .today-row td {
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+
+    /* Kontakt detalji */
+    .contact-detail-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+    }
+    .contact-detail-item .cdi-icon {
+      width: 36px; height: 36px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-detail-item a {
+      color: var(--gold-dark);
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .contact-detail-item a:hover { color: var(--gold); text-decoration: underline; }
+
+    /* Forma kolona */
+    .contact-form-col {}
+
+    .booking-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .booking-form h3 {
+      font-size: 1.4rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+    .booking-form .form-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.3rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+    .form-group label .required { color: var(--gold); margin-left: 2px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--cream);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-light);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184,137,90,0.12);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+    .form-check label {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(184,137,90,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(184,137,90,0.45);
+    }
+
+    /* Uspešna poruka */
+    .form-success {
+      display: none;
+      background: #f0faf0;
+      border: 1px solid #a8d8a8;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form-success.show { display: block; }
+    .form-success .success-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .form-success p { color: #2d7a2d; font-weight: 500; }
+
+    /* Mapa */
+    .map-section { padding: 0 0 6rem; background: var(--white); }
+    /* Google Maps iframe */
+    .map-iframe-wrap {
+      width: 100%;
+      height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .map-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Socijalne mreže */
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .social-link {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      color: var(--text-mid);
+    }
+    .social-link:hover {
+      border-color: var(--gold);
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .booking-form { padding: 1.8rem 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <header class="navbar" role="banner">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Lovely Pets – početna">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-text">
+          <span class="logo-name">Lovely Pets</span>
+          <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="o-nama.html">O nama</a>
+        <a href="usluge.html">Usluge</a>
+        <a href="galerija.html">Galerija</a>
+        <a href="kontakt.html" class="nav-cta active">Zakaži termin</a>
+      </nav>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="nav-mobile" aria-label="Mobilna navigacija">
+    <button class="close-btn" aria-label="Zatvori meni">&times;</button>
+    <a href="index.html">Početna</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="usluge.html">Usluge i cenovnik</a>
+    <a href="galerija.html">Galerija</a>
+    <a href="kontakt.html" class="active">Kontakt</a>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-tag">Dođite kod nas</span>
+        <h1 class="section-title">Kontakt i zakazivanje</h1>
+        <div class="divider"></div>
+        <p class="section-sub">Zakažite termin telefonom ili popunite formu ispod. Odgovaramo u roku od 24 časa.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ KONTAKT SADRŽAJ ════════════ -->
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading" class="sr-only">Kontakt informacije i forma za zakazivanje</h2>
+        <div class="contact-grid">
+
+          <!-- Leva kolona – info -->
+          <div class="contact-info-col">
+
+            <!-- Radno vreme -->
+            <div class="info-card reveal">
+              <div class="info-card-header">
+                <div class="ic-icon">🕐</div>
+                <h3>Radno vreme</h3>
+              </div>
+              <table class="hours-table" aria-label="Radno vreme salona">
+                <tbody>
+                  <tr class="today-row">
+                    <th scope="row">Ponedeljak</th>
+                    <td>09:00 – 18:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Utorak</th>
+                    <td>09:00 – 18:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sreda</th>
+                    <td>09:00 – 18:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Četvrtak</th>
+                    <td>09:00 – 18:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Petak</th>
+                    <td>09:00 – 18:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Subota</th>
+                    <td>09:00 – 15:00</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nedelja</th>
+                    <td class="closed">Zatvoreno</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Kontakt podaci -->
+            <div class="info-card reveal reveal-delay-1">
+              <div class="info-card-header">
+                <div class="ic-icon">📞</div>
+                <h3>Kako da nas kontaktirate</h3>
+              </div>
+              <div class="contact-detail-list">
+                <div class="contact-detail-item">
+                  <div class="cdi-icon">📞</div>
+                  <div>
+                    <strong style="display:block; font-size:0.8rem; color:var(--text-light); margin-bottom:2px;">Telefon</strong>
+                    <a href="tel:0642641469">064 2641469</a>
+                  </div>
+                </div>
+                <div class="contact-detail-item">
+                  <div class="cdi-icon">📍</div>
+                  <div>
+                    <strong style="display:block; font-size:0.8rem; color:var(--text-light); margin-bottom:2px;">Adresa</strong>
+                    <span>Pećka 76, Kruševac</span>
+                  </div>
+                </div>
+                <div class="contact-detail-item">
+                  <div class="cdi-icon">✉️</div>
+                  <div>
+                    <strong style="display:block; font-size:0.8rem; color:var(--text-light); margin-bottom:2px;">E-mail</strong>
+                    <a href="mailto:info@lovelypets.rs">info@lovelypets.rs</a>
+                  </div>
+                </div>
+                <div class="contact-detail-item">
+                  <div class="cdi-icon">💬</div>
+                  <div>
+                    <strong style="display:block; font-size:0.8rem; color:var(--text-light); margin-bottom:2px;">Viber / WhatsApp</strong>
+                    <a href="viber://chat?number=0642641469">064 2641469</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Napomena -->
+            <div class="info-card reveal reveal-delay-2" style="border-left: 3px solid var(--gold);">
+              <div class="info-card-header">
+                <div class="ic-icon">💡</div>
+                <h3>Važna napomena</h3>
+              </div>
+              <p style="font-size:0.88rem; color:var(--text-light); line-height:1.7;">
+                Molimo vas da dovedete ljubimca <strong style="color:var(--text-dark);">na prazan stomak</strong> 
+                (bez jela 2–3 sata pre dolaska). Ponesite omiljenu igračku ili deku za veće komfor ljubimca.
+                Za agresivne ili preplašene ljubimce preporučujemo prethodnu konsultaciju.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Desna kolona – forma -->
+          <div class="contact-form-col reveal">
+            <div class="booking-form">
+              <h3>Zakaži termin</h3>
+              <p class="form-subtitle">Popunite formu i javićemo vam se u najkraćem mogućem roku.</p>
+
+              <form id="booking-form" novalidate>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="owner-name">Vaše ime <span class="required">*</span></label>
+                    <input type="text" id="owner-name" name="owner-name" placeholder="npr. Marko Marković" required autocomplete="name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Broj telefona <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="06x xxx xxxx" required autocomplete="tel" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="pet-name">Ime ljubimca <span class="required">*</span></label>
+                    <input type="text" id="pet-name" name="pet-name" placeholder="npr. Max" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="pet-type">Vrsta <span class="required">*</span></label>
+                    <select id="pet-type" name="pet-type" required>
+                      <option value="" disabled selected>Izaberite vrstu</option>
+                      <option value="pas">Pas</option>
+                      <option value="macka">Mačka</option>
+                      <option value="ostalo">Ostalo</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="breed">Rasa</label>
+                    <input type="text" id="breed" name="breed" placeholder="npr. Golden Retriver" />
+                  </div>
+                  <div class="form-group">
+                    <label for="service">Usluga <span class="required">*</span></label>
+                    <select id="service" name="service" required>
+                      <option value="" disabled selected>Izaberite uslugu</option>
+                      <option value="kompletan">Kompletan tretman</option>
+                      <option value="higijenski">Higijenski tretman</option>
+                      <option value="furminiranje">Furminiranje</option>
+                      <option value="kupanje">Samo kupanje i sušenje</option>
+                      <option value="nokti">Sečenje noktiju</option>
+                      <option value="konsultacija">Konsultacija</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="pref-date">Željeni datum</label>
+                    <input type="date" id="pref-date" name="pref-date" min="" />
+                  </div>
+                  <div class="form-group">
+                    <label for="pref-time">Željeno vreme</label>
+                    <select id="pref-time" name="pref-time">
+                      <option value="" disabled selected>Izaberite vreme</option>
+                      <option>09:00</option>
+                      <option>10:00</option>
+                      <option>11:00</option>
+                      <option>12:00</option>
+                      <option>13:00</option>
+                      <option>14:00</option>
+                      <option>15:00</option>
+                      <option>16:00</option>
+                      <option>17:00</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Napomena</label>
+                  <textarea id="message" name="message" placeholder="Navedite posebne zahteve, zdravstvene napomene ili pitanja..."></textarea>
+                </div>
+
+                <div class="form-check">
+                  <input type="checkbox" id="privacy" name="privacy" required />
+                  <label for="privacy">
+                    Slažem se sa obradom ličnih podataka u svrhu zakazivanja termina.
+                    Vaši podaci neće biti deljeni sa trećim licima.
+                  </label>
+                </div>
+
+                <button type="submit" class="form-submit">
+                  📅 Pošalji zahtev za termin
+                </button>
+
+              </form>
+
+              <div id="form-success" class="form-success" role="alert">
+                <div class="success-icon">🎉</div>
+                <p><strong>Hvala! Vaš zahtev je primljen.</strong></p>
+                <p style="font-size:0.85rem; margin-top:0.3rem;">Javićemo vam se u najkraćem mogućem roku na navedeni broj telefona.</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ MAPA ════════════ -->
+    <section class="map-section" aria-labelledby="map-heading">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:2rem;">
+          <span class="section-tag">Kako do nas</span>
+          <h2 class="section-title" id="map-heading">Pronađite nas u Kruševcu</h2>
+          <div class="divider" style="margin: 1rem auto;"></div>
+          <p class="section-sub" style="margin:0 auto;">Ulica Pećka 76, Kruševac · Parking ispred objekta</p>
+        </div>
+
+        <!-- Google Maps iframe -->
+        <div class="reveal">
+          <div class="map-iframe-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d722.5685699998717!2d21.31640392208501!3d43.580002986464244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47568751cf63606d%3A0x967823d0fab8518d!2sSalon%20za%20%C5%A1i%C5%A1anje%20pasa%20LOVELY%20PETS%20Kru%C5%A1evac!5e0!3m2!1ssr!2srs!4v1780443679380!5m2!1ssr!2srs"
+              width="100%"
+              height="100%"
+              style="border:0; border-radius: 20px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lovely Pets lokacija na Google Maps">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem;">
+            <div class="logo-icon">🐾</div>
+            <div class="logo-text">
+              <span class="logo-name">Lovely Pets</span>
+              <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+            </div>
+          </div>
+          <p>Profesionalni salon za negu kućnih ljubimaca u srcu Kruševca. Jer vaš ljubimac zaslužuje samo najbolje.</p>
+          <a
+            href="https://www.instagram.com/lovely_pets_groomer?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ig-link"
+            aria-label="Pratite nas na Instagramu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4>Prečice</h4>
+          <ul>
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="o-nama.html">O salonu</a></li>
+            <li><a href="usluge.html">Usluge i cenovnik</a></li>
+            <li><a href="galerija.html">Galerija</a></li>
+            <li><a href="kontakt.html" class="active">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Pećka 76, Kruševac</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <a href="tel:0642641469" style="color:rgba(255,255,255,0.65);">064 2641469</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">🕐</span>
+            <span>Pon–Pet: 09:00–18:00<br>Sub: 09:00–15:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Lovely Pets. Sva prava zadržana.</span>
+        <span>Napravili sa ❤️ za ljubimce u Kruševcu</span>
+          </div>
+        </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* Kontakt forma – jednostavna JS validacija i simulacija slanja */
+    (function () {
+      var form    = document.getElementById('booking-form');
+      var success = document.getElementById('form-success');
+
+      // Postavi min datum na danas
+      var dateInput = document.getElementById('pref-date');
+      if (dateInput) {
+        var today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+      }
+
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Proveri obavezna polja
+        var required = form.querySelectorAll('[required]');
+        var valid = true;
+
+        required.forEach(function (field) {
+          if (!field.value.trim() && field.type !== 'checkbox') {
+            field.style.borderColor = '#c0392b';
+            valid = false;
+          } else if (field.type === 'checkbox' && !field.checked) {
+            field.parentElement.style.color = '#c0392b';
+            valid = false;
+          } else {
+            field.style.borderColor = '';
+          }
+        });
+
+        if (!valid) return;
+
+        // Simulacija slanja
+        var btn = form.querySelector('.form-submit');
+        btn.textContent = 'Slanje...';
+        btn.disabled = true;
+
+        setTimeout(function () {
+          form.style.display = 'none';
+          success.classList.add('show');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 1200);
+      });
+
+      // Resetuj boju pri unosu
+      form.querySelectorAll('input, select, textarea').forEach(function (field) {
+        field.addEventListener('input', function () {
+          this.style.borderColor = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Usluge i cenovnik salona Lovely Pets Kruševac – kompletan tretman, higijenski tretman, furminiranje. Cene za male, srednje i velike rase." />
+  <title>Usluge i cenovnik | Lovely Pets – Kruševac</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23b8895a%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238c6338%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2232%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2236%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%3E%F0%9F%90%BE%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* ── Usluge lokalni stilovi ── */
+    .services-detail { padding: 6rem 0; background: var(--white); }
+    .services-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .service-detail-card {
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-detail-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .sdc-header {
+      padding: 2.5rem 2rem 2rem;
+      background: linear-gradient(135deg, var(--cream), var(--cream-dark));
+      text-align: center;
+      position: relative;
+    }
+    .sdc-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    .sdc-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .sdc-header h3 { color: var(--text-dark); margin-bottom: 0.4rem; }
+    .sdc-header p { font-size: 0.85rem; color: var(--text-light); }
+    .sdc-body {
+      padding: 1.8rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .sdc-includes {
+      margin: 0 0 1.5rem;
+      flex: 1;
+    }
+    .sdc-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.45rem 0;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--border);
+    }
+    .sdc-includes li:last-child { border-bottom: none; }
+    .sdc-includes li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .sdc-duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      background: var(--cream);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .sdc-cta {
+      margin-top: auto;
+    }
+    .sdc-cta .btn { width: 100%; justify-content: center; }
+
+    /* Cenovnik tabela */
+    .pricing-section { padding: 6rem 0; background: var(--cream); }
+    .pricing-section .section-header { text-align: center; margin-bottom: 3rem; }
+    .pricing-section .section-header .divider { margin: 1rem auto 2rem; }
+
+    .price-table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-size: 0.92rem;
+    }
+    .price-table thead { background: linear-gradient(135deg, var(--brown), var(--gold-dark)); }
+    .price-table thead th {
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .price-table thead th:first-child { border-radius: 16px 0 0 0; }
+    .price-table thead th:last-child  { border-radius: 0 16px 0 0; }
+    .price-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .price-table tbody tr:last-child { border-bottom: none; }
+    .price-table tbody tr:hover { background: var(--cream); }
+    .price-table td {
+      padding: 1rem 1.4rem;
+      color: var(--text-mid);
+      vertical-align: middle;
+    }
+    .price-table td:first-child {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .price-table .price-cell {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--gold-dark);
+      white-space: nowrap;
+    }
+    .price-table .category-row td {
+      background: var(--cream-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 0.55rem 1.4rem;
+    }
+    .price-table .note-row td {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-style: italic;
+      padding: 0.8rem 1.4rem;
+      background: var(--cream);
+    }
+
+    /* Napomena */
+    .pricing-note {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-light);
+    }
+    .pricing-note strong { color: var(--text-dark); }
+
+    /* Dodaci */
+    .addons-section { padding: 6rem 0; background: var(--white); }
+    .addons-section .section-header { text-align: center; margin-bottom: 3rem; }
+    .addons-section .section-header .divider { margin: 1rem auto 2rem; }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+    .addon-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      background: var(--cream);
+    }
+    .addon-card:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-3px);
+    }
+    .addon-icon { font-size: 2rem; display: block; margin-bottom: 0.7rem; }
+    .addon-card h4 { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .addon-card .addon-price {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--gold-dark);
+      font-weight: 700;
+    }
+
+    @media (max-width: 1024px) {
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .services-detail-grid { grid-template-columns: 1fr; }
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .addons-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <header class="navbar" role="banner">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Lovely Pets – početna">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-text">
+          <span class="logo-name">Lovely Pets</span>
+          <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Glavna navigacija">
+        <a href="index.html">Početna</a>
+        <a href="o-nama.html">O nama</a>
+        <a href="usluge.html" class="active">Usluge</a>
+        <a href="galerija.html">Galerija</a>
+        <a href="kontakt.html" class="nav-cta">Zakaži termin</a>
+      </nav>
+      <button class="hamburger" aria-label="Otvori meni" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="nav-mobile" aria-label="Mobilna navigacija">
+    <button class="close-btn" aria-label="Zatvori meni">&times;</button>
+    <a href="index.html">Početna</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="usluge.html" class="active">Usluge i cenovnik</a>
+    <a href="galerija.html">Galerija</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-tag">Šta nudimo</span>
+        <h1 class="section-title">Usluge i cenovnik</h1>
+        <div class="divider"></div>
+        <p class="section-sub">Profesionalna nega prilagođena svakoj rasi i potrebi. Transparentne cene bez skrivenih troškova.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ DETALJNE USLUGE ════════════ -->
+    <section class="services-detail" aria-labelledby="services-detail-heading">
+      <div class="container">
+        <div style="text-align:center;" class="reveal">
+          <span class="section-tag">Naše usluge</span>
+          <h2 class="section-title" id="services-detail-heading">Sve što vaš ljubimac treba</h2>
+          <div class="divider" style="margin: 1rem auto 0;"></div>
+        </div>
+        <div class="services-detail-grid">
+
+          <!-- Kompletan tretman -->
+          <article class="service-detail-card reveal reveal-delay-1">
+            <div class="sdc-header">
+              <span class="sdc-icon">🛁</span>
+              <h3>Kompletan tretman</h3>
+              <p>Sve u jednoj poseti – od kupanja do savršene frizure</p>
+            </div>
+            <div class="sdc-body">
+              <span class="sdc-duration">⏱ 2–4 sata</span>
+              <ul class="sdc-includes">
+                <li>Kupanje profesionalnim šamponom</li>
+                <li>Nanošenje balzama i kondicionera</li>
+                <li>Sušenje i češljanje</li>
+                <li>Šišanje po standardu rase ili željenom stilu</li>
+                <li>Nega ušiju i čišćenje</li>
+                <li>Sečenje noktiju</li>
+                <li>Šišanje šapica i higijenskih zona</li>
+                <li>Parfem i maramica</li>
+              </ul>
+              <div class="sdc-cta">
+                <a href="kontakt.html" class="btn btn-primary">Zakaži tretman</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Higijenski tretman -->
+          <article class="service-detail-card reveal reveal-delay-2">
+            <div class="sdc-header">
+              <span class="sdc-icon">✂️</span>
+              <h3>Higijenski tretman</h3>
+              <p>Osnovna nega i čistoća između kompletnih tretmana</p>
+            </div>
+            <div class="sdc-body">
+              <span class="sdc-duration">⏱ 45–90 min</span>
+              <ul class="sdc-includes">
+                <li>Šišanje šapica i tabana</li>
+                <li>Šišanje trbuha i intimnih zona</li>
+                <li>Nega i čišćenje ušnih kanala</li>
+                <li>Sečenje noktiju</li>
+                <li>Češljanje i rasčešljavanje čvorova</li>
+                <li>Pranje njuške i očnog predela</li>
+              </ul>
+              <div class="sdc-cta">
+                <a href="kontakt.html" class="btn btn-primary">Zakaži tretman</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Furminiranje -->
+          <article class="service-detail-card reveal reveal-delay-3">
+            <div class="sdc-header">
+              <span class="sdc-icon">🪮</span>
+              <h3>Furminiranje</h3>
+              <p>Specijalizovano uklanjanje poddlake za manje dlakanja</p>
+            </div>
+            <div class="sdc-body">
+              <span class="sdc-duration">⏱ 60–120 min</span>
+              <ul class="sdc-includes">
+                <li>Kupanje de-shedding šamponom</li>
+                <li>Tretman za labavljenje poddlake</li>
+                <li>Profesionalno furminiranje celim telom</li>
+                <li>Sušenje i češljanje</li>
+                <li>Smanjuje dlakanje i do 80%</li>
+                <li>Idealno za goldene, haskije, labradore</li>
+              </ul>
+              <div class="sdc-cta">
+                <a href="kontakt.html" class="btn btn-primary">Zakaži tretman</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ CENOVNIK TABELA ════════════ -->
+    <section class="pricing-section" aria-labelledby="pricing-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Transparentne cene</span>
+          <h2 class="section-title" id="pricing-heading">Cenovnik usluga</h2>
+          <div class="divider"></div>
+          <p class="section-sub" style="margin: 0 auto; max-width: 520px;">
+            Cene su okvirne i zavise od gustine i dužine dlake, temperamenta i starosti ljubimca.
+            Tačna cena se utvrđuje pri dolasku.
+          </p>
+        </div>
+
+        <div class="price-table-wrap reveal">
+          <table class="price-table" aria-label="Cenovnik usluga po veličini rase">
+            <thead>
+              <tr>
+                <th scope="col">Usluga</th>
+                <th scope="col">Mala rasa<br><small style="font-weight:400; font-size:0.75rem;">(do 10 kg)</small></th>
+                <th scope="col">Srednja rasa<br><small style="font-weight:400; font-size:0.75rem;">(10–25 kg)</small></th>
+                <th scope="col">Velika rasa<br><small style="font-weight:400; font-size:0.75rem;">(25+ kg)</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="category-row">
+                <td colspan="4">🐕 Psi – kompletan tretman</td>
+              </tr>
+              <tr>
+                <td>Kratka dlaka (kratko šišanje)</td>
+                <td class="price-cell">2.000 RSD</td>
+                <td class="price-cell">2.800 RSD</td>
+                <td class="price-cell">3.800 RSD</td>
+              </tr>
+              <tr>
+                <td>Srednja dlaka</td>
+                <td class="price-cell">2.500 RSD</td>
+                <td class="price-cell">3.500 RSD</td>
+                <td class="price-cell">4.500 RSD</td>
+              </tr>
+              <tr>
+                <td>Duga dlaka / standardi rase</td>
+                <td class="price-cell">3.000 RSD</td>
+                <td class="price-cell">4.200 RSD</td>
+                <td class="price-cell">5.500 RSD</td>
+              </tr>
+
+              <tr class="category-row">
+                <td colspan="4">✂️ Psi – higijenski tretman</td>
+              </tr>
+              <tr>
+                <td>Higijenski tretman</td>
+                <td class="price-cell">1.200 RSD</td>
+                <td class="price-cell">1.600 RSD</td>
+                <td class="price-cell">2.200 RSD</td>
+              </tr>
+              <tr>
+                <td>Kupanje i sušenje</td>
+                <td class="price-cell">1.000 RSD</td>
+                <td class="price-cell">1.400 RSD</td>
+                <td class="price-cell">2.000 RSD</td>
+              </tr>
+
+              <tr class="category-row">
+                <td colspan="4">🪮 Psi – furminiranje</td>
+              </tr>
+              <tr>
+                <td>Furminiranje + kupanje</td>
+                <td class="price-cell">1.500 RSD</td>
+                <td class="price-cell">2.200 RSD</td>
+                <td class="price-cell">3.200 RSD</td>
+              </tr>
+
+              <tr class="category-row">
+                <td colspan="4">🐈 Mačke</td>
+              </tr>
+              <tr>
+                <td>Kratka dlaka – kompletan tretman</td>
+                <td class="price-cell">1.800 RSD</td>
+                <td class="price-cell">2.200 RSD</td>
+                <td class="price-cell">—</td>
+              </tr>
+              <tr>
+                <td>Duga dlaka – kompletan tretman</td>
+                <td class="price-cell">2.500 RSD</td>
+                <td class="price-cell">3.000 RSD</td>
+                <td class="price-cell">—</td>
+              </tr>
+              <tr>
+                <td>Higijenski tretman (mačke)</td>
+                <td class="price-cell">1.000 RSD</td>
+                <td class="price-cell">1.300 RSD</td>
+                <td class="price-cell">—</td>
+              </tr>
+
+              <tr class="note-row">
+                <td colspan="4">* Sve cene su informativne. Za tačnu cenu kontaktirajte nas na 064 2641469 ili zakažite konsultaciju.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pricing-note reveal">
+          <strong>📌 Napomena:</strong> Cene mogu biti veće kod jako zapuštene dlake, jako agresivnih ljubimaca
+          koji zahtevaju poseban pristup, ili kod specifičnih rasa sa zahtevnijim standardima šišanja.
+          U svakom slučaju, o svemu vas informišemo unapred.
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ DODACI I SPA ════════════ -->
+    <section class="addons-section" aria-labelledby="addons-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Spa dodaci</span>
+          <h2 class="section-title" id="addons-heading">Dopunske usluge</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="addons-grid">
+          <div class="addon-card reveal reveal-delay-1">
+            <span class="addon-icon">💅</span>
+            <h4>Sečenje noktiju</h4>
+            <div class="addon-price">od 300 RSD</div>
+          </div>
+          <div class="addon-card reveal reveal-delay-2">
+            <span class="addon-icon">👂</span>
+            <h4>Čišćenje ušiju</h4>
+            <div class="addon-price">od 300 RSD</div>
+          </div>
+          <div class="addon-card reveal reveal-delay-3">
+            <span class="addon-icon">🦷</span>
+            <h4>Pranje zuba</h4>
+            <div class="addon-price">od 500 RSD</div>
+          </div>
+          <div class="addon-card reveal reveal-delay-4">
+            <span class="addon-icon">🌿</span>
+            <h4>Spa tretman dlake</h4>
+            <div class="addon-price">od 700 RSD</div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:2.5rem;" class="reveal">
+          <a href="kontakt.html" class="btn btn-primary">📅 Zakaži termin</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem;">
+            <div class="logo-icon">🐾</div>
+            <div class="logo-text">
+              <span class="logo-name">Lovely Pets</span>
+              <span class="logo-sub">Salon za ljubimce · Kruševac</span>
+            </div>
+          </div>
+          <p>Profesionalni salon za negu kućnih ljubimaca u srcu Kruševca. Jer vaš ljubimac zaslužuje samo najbolje.</p>
+          <a
+            href="https://www.instagram.com/lovely_pets_groomer?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ig-link"
+            aria-label="Pratite nas na Instagramu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="footer-col">
+          <h4>Prečice</h4>
+          <ul>
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="o-nama.html">O salonu</a></li>
+            <li><a href="usluge.html" class="active">Usluge i cenovnik</a></li>
+            <li><a href="galerija.html">Galerija</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Pećka 76, Kruševac</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📞</span>
+            <a href="tel:0642641469" style="color:rgba(255,255,255,0.65);">064 2641469</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">🕐</span>
+            <span>Pon–Pet: 09:00–18:00<br>Sub: 09:00–15:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Lovely Pets. Sva prava zadržana.</span>
+        <span>Napravili sa ❤️ za ljubimce u Kruševcu</span>
+          </div>
+        </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

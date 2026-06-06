@@ -1,0 +1,366 @@
+/* ============================================
+   LOVELY PETS – home.css
+   Stilovi specifični za index.html
+   ============================================ */
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: var(--nav-h);
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 4rem 6rem 10%;
+  background: var(--cream);
+  position: relative;
+  z-index: 1;
+}
+.hero-left::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(184,137,90,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.hero-eyebrow .paw { font-size: 1.1rem; }
+.hero-eyebrow span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.hero h1 {
+  color: var(--text-dark);
+  margin-bottom: 1.4rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-dark);
+}
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  margin-bottom: 2.2rem;
+  max-width: 460px;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.8rem;
+}
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+}
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--gold-dark);
+  line-height: 1;
+}
+.hero-stat span {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.hero-right {
+  position: relative;
+  background: var(--cream-dark);
+  overflow: hidden;
+}
+.hero-image-wrap {
+  position: absolute;
+  inset: 0;
+}
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(92,61,30,0.18) 100%);
+}
+/* ── ZAŠTO MI ── */
+.why-us {
+  padding: 7rem 0;
+  background: var(--white);
+}
+.why-us-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.why-us-header .divider { margin: 1rem auto 2rem; }
+.why-us-header .section-sub { margin: 0 auto; }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.why-card {
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--cream);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0);
+  transition: transform var(--transition);
+  transform-origin: left;
+}
+.why-card:hover::before { transform: scaleX(1); }
+.why-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.why-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.why-card h3 {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+.why-card p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ── USLUGE PREGLED ── */
+.services-preview {
+  padding: 7rem 0;
+  background: var(--cream);
+}
+.services-preview-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.service-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+}
+.service-card-thumb {
+  height: 200px;
+  background: linear-gradient(135deg, var(--cream-dark), var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.service-card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(92,61,30,0.08));
+}
+.service-card-body {
+  padding: 1.5rem;
+}
+.service-card-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+.service-card-body p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+}
+.service-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-price .from {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+}
+.service-price .amount {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+/* ── PRE I POSLE ── */
+.before-after {
+  padding: 7rem 0;
+  background: var(--white);
+}
+.ba-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.ba-header .divider { margin: 1rem auto 2rem; }
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.ba-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  cursor: pointer;
+}
+.ba-card:hover .ba-images { transform: scale(1.02); }
+.ba-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transition: transform 0.4s ease;
+}
+.ba-img {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.ba-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ba-img.before { background: linear-gradient(135deg, #e0d0c0, #c8b49a); }
+.ba-img.after  { background: linear-gradient(135deg, #d4c4a8, #b89870); }
+.ba-label {
+  position: absolute;
+  top: 0.6rem; left: 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.ba-img.before .ba-label { background: rgba(0,0,0,0.45); color: #fff; }
+.ba-img.after  .ba-label { background: var(--gold); color: #fff; }
+
+/* ── Beban "posle" slika: spuštamo fokus da se vidi cela glava ── */
+.ba-img.bebean-posle img {
+  object-position: center 30% !important;
+}
+
+/* ── Lav "pre" slika: spuštamo fokus da se vidi glava mačke umesto peškira ── */
+.ba-img.lav-pre img {
+  object-fit: cover;
+  object-position: center 15% !important;
+}
+.ba-info {
+  padding: 1rem 1.2rem;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.ba-info strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+.ba-info span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 0.15rem;
+}
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--brown) 0%, var(--gold-dark) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '🐾';
+  position: absolute;
+  top: -1rem;
+  left: 5%;
+  font-size: 8rem;
+  opacity: 0.07;
+  transform: rotate(-20deg);
+}
+.cta-banner::after {
+  content: '🐾';
+  position: absolute;
+  bottom: -1rem;
+  right: 5%;
+  font-size: 8rem;
+  opacity: 0.07;
+  transform: rotate(20deg);
+}
+.cta-banner h2 {
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.cta-banner p {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.05rem;
+  margin-bottom: 2.2rem;
+}
+.cta-banner .btn-primary {
+  background: var(--white);
+  color: var(--gold-dark);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.cta-banner .btn-primary:hover {
+  background: var(--cream);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
